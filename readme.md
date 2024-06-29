@@ -245,6 +245,10 @@ Contributions are welcome! Here are several ways you can contribute:
 - [X] `► Question Generation`
 - [ ] `► Detect Different Actors`
 - [ ] `► Only Start Analysis When Question Asked`
+
+Seqence Diagram:
+![](./plantuml/appSequence.png)
+
 ---
 
 ##  License

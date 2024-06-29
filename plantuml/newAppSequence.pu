@@ -1,0 +1,95 @@
+@startuml appSequence
+'!theme vibrant
+
+actor Client
+actor "Relationship Manager" as RM
+participant "RM Interface" as FE
+participant "Backend" as BE
+participant "Language To Text\nModel" as LTTM
+participant "Language Analysis\nModel" as LAM
+participant "Question Generation\nModel" as QGM
+participant "Customer - Manager\nDifferentiation Model" as CMDM
+participant "Database" as DB
+
+activate Client
+
+Client --> RM : phones RM
+activate RM
+RM --> FE : request client info
+activate FE
+FE --> BE : request client info
+activate BE
+BE --> DB : request client info
+activate DB
+DB --> BE : fetched client info
+deactivate DB
+BE --> BE : cache client info locally
+BE --> FE : return client info
+deactivate BE
+FE <--> BE : register webhook
+FE --> RM : show client info
+deactivate FE
+
+
+BE <--> Client : listens
+activate BE
+RM --> Client : interacts
+
+
+BE --> QGM : request question generation
+activate QGM
+QGM --> BE : generated questions
+deactivate QGM
+BE --> BE : cache questions for clientID
+
+BE --> FE : questions displayed
+RM --> FE: read questions
+RM --> Client : integrate questions
+
+loop continuous action as long as subscribed to webhook
+    BE --> Client : record call
+
+    BE --> CMDM : request audio content splitting
+    activate CMDM
+    CMDM --> BE : split audio lines
+    deactivate CMDM
+
+    BE --> LTTM : request transscript
+    activate LTTM
+    LTTM --> BE : provide transscript
+    deactivate LTTM
+
+    BE --> LAM : request content rating and questio\ncontext certainty for client part
+    activate LAM
+    LAM --> BE : return score and\nquestion context certainty
+    deactivate LAM
+
+    alt question context certainty is over 80%
+        BE --> FE : display score
+        deactivate BE
+        FE --> RM : show score
+
+        RM --> FE: enter request level
+        activate FE
+        FE --> BE: provide request level
+        activate BE
+        BE --> FE: provide certainty\nbased on LAM score & level
+        deactivate BE
+        FE --> RM: provide score
+        deactivate FE
+    end
+end
+alt score and service match
+    RM --> Client : provide service
+
+else score does not match
+    RM --> Client: continue conversation
+    alt still no match after 3min\n(time of your choice)
+        RM --> Client : convince client that for irl meeting\n(RM needs to be kind)
+        deactivate RM
+        deactivate Client
+    end
+end
+
+
+@enduml
