@@ -29,7 +29,6 @@
   - [ Installation](#-installation)
   - [ Usage](#-usage)
   - [ Tests](#-tests)
-- [ Project Roadmap](#-project-roadmap)
 - [ Contributing](#-contributing)
 - [ License](#-license)
 - [ Acknowledgments](#-acknowledgments)
@@ -153,7 +152,7 @@ FakeSniffer is an open-source software application developed primarily for detec
 
 **System Requirements:**
 
-* **Java**: `version x.y.z`
+* **Java**: `version 21.x`
 
 ###  Installation
 
@@ -190,14 +189,6 @@ FakeSniffer is an open-source software application developed primarily for detec
 > ```console
 > $ mvn test
 > ```
-
----
-
-##  Project Roadmap
-
-- [X] `► INSERT-TASK-1`
-- [ ] `► INSERT-TASK-2`
-- [ ] `► ...`
 
 ---
 
@@ -248,7 +239,7 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ##  License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the MIT License. For more details, refer to the [LICENSE](./LICENSE) file.
 
 ---
 
