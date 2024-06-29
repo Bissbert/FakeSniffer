@@ -15,6 +15,13 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for the WebSocket.
+ * It provides methods to handle voice input from the clients and evaluate the content of the conversations.
+ * The content is evaluated using the LAM model.
+ * The results are sent back to the clients using WebSocket.
+ * @author Bissbert
+ */
 @Controller
 public class WebSocketController {
 
@@ -29,6 +36,12 @@ public class WebSocketController {
 
     private final ConcurrentHashMap<Long, StringBuilder> activeConversations = new ConcurrentHashMap<>();
 
+    /**
+     * Handles the voice input from the clients.
+     * The voice input is stored in the active conversations map.
+     * @param voiceData The voice data.
+     * @param headerAccessor The header accessor.
+     */
     @MessageMapping("/sendVoice")
     public void handleVoiceInput(@Payload String voiceData, SimpMessageHeaderAccessor headerAccessor) {
         // Extract client ID from headers
@@ -40,7 +53,13 @@ public class WebSocketController {
         activeConversations.computeIfAbsent(clientId, k -> new StringBuilder()).append(voiceData);
     }
 
-    @Scheduled(fixedRate = 2000)
+    /**
+     * Evaluates the content of the active conversations.
+     * The content is evaluated using the LAM model.
+     * The results are sent back to the clients using WebSocket.
+     * The evaluation is done periodically every second.
+     */
+    @Scheduled(fixedRate = 1000)
     public void evaluateContent() {
         activeConversations.forEach((clientId, conversation) -> {
             List<Report> historicalReports = reportService.getReportsForClient(clientId);

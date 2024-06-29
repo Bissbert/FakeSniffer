@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Service for the question generation model.
+ * It provides methods to interact with the question generation model.
+ * @author Bissbert
+ */
 @Service
 public class QuestionGenerationService {
 
@@ -26,6 +31,11 @@ public class QuestionGenerationService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Generates questions for the given report content.
+     * @param reportContent The report content.
+     * @return A list of questions.
+     */
     public List<String> generateQuestions(String reportContent) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -6,6 +6,11 @@ import lombok.Setter;
 
 import java.util.Date;
 
+/**
+ * Entity class for the reports.
+ * It represents the reports in the database.
+ * @author Bissbert
+ */
 @Setter
 @Getter
 @Entity

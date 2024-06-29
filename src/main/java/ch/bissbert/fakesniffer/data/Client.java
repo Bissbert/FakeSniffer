@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Entity class for the clients.
+ * It represents the clients in the database.
+ * @author Bissbert
+ */
 @Setter
 @Getter
 @Entity

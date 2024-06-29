@@ -11,6 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
+/**
+ * Service for the LTTM model.
+ * It provides methods to interact with the LTTM model.
+ * @author Bissbert
+ */
 @Service
 public class LttmService {
     private final RestTemplate restTemplate;
@@ -21,6 +26,11 @@ public class LttmService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Gets the transcription from the LTTM model for the given voice data.
+     * @param voiceData The voice data.
+     * @return The transcription.
+     */
     public String getTranscription(String voiceData) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

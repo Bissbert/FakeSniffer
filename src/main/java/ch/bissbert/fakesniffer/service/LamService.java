@@ -12,6 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Service for the LAM model.
+ * It provides methods to interact with the LAM model.
+ * @author Bissbert
+ */
 @Service
 public class LamService {
     private final RestTemplate restTemplate;
@@ -22,6 +27,12 @@ public class LamService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Gets the content score from the LAM model for the given existing data and active conversation.
+     * @param existingData The existing data.
+     * @param activeConversation The active conversation.
+     * @return The content score.
+     */
     public Double getContentScore(String existingData, String activeConversation) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for the questions.
+ * It provides an endpoint to generate questions for a client.
+ * The questions are generated based on the reports of the client.
+ * @author Bissbert
+ */
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
@@ -22,6 +28,12 @@ public class QuestionController {
     @Autowired
     private QuestionGenerationService questionGenerationService;
 
+    /**
+     * Generates questions for a client based on the reports of the client.
+     * The questions are generated using a question generation model.
+     * @param clientId The id of the client.
+     * @return A list of questions.
+     */
     @GetMapping("/generate/{clientId}")
     public ResponseEntity<List<String>> generateQuestionsForClient(@PathVariable Long clientId) {
         try {
