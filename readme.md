@@ -21,16 +21,17 @@
 <details>
   <summary>Table of Contents</summary><br>
 
-- [ Overview](#-overview)
-- [ Features](#-features)
-- [ Repository Structure](#-repository-structure)
-- [ Modules](#-modules)
-- [ Getting Started](#-getting-started)
-  - [ Installation](#-installation)
-  - [ Usage](#-usage)
-  - [ Tests](#-tests)
-- [ Contributing](#-contributing)
-- [ License](#-license)
+- [ Overview](#overview)
+- [ Features](#features)
+- [ Repository Structure](#repository-structure)
+- [ Modules](#modules)
+- [ Getting Started](#getting-started)
+  - [ Installation](#installation)
+  - [ Usage](#usage)
+  - [ Tests](#tests)
+- [ Contributing](#contributing)
+- [ Roadmap](#project-roadmap)
+- [ License](#license)
 </details>
 <hr>
 
@@ -236,10 +237,20 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ---
 
+##  Project Roadmap
+- [X] `► SpeechToText API Integration`
+- [X] `► Language Analysis Model Integration`
+- [X] `► Real-time Messaging`
+- [X] `► Report Fetching`
+- [X] `► Question Generation`
+- [ ] `► Detect Different Actors`
+- [ ] `► Only Start Analysis When Question Asked`
+---
+
 ##  License
 
 This project is protected under the MIT License. For more details, refer to the [LICENSE](./LICENSE) file.
 
-[**Return**](#-overview)
+[**Return**](#overview)
 
 ---
