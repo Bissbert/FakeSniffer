@@ -31,7 +31,6 @@
   - [ Tests](#-tests)
 - [ Contributing](#-contributing)
 - [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
 </details>
 <hr>
 
@@ -171,7 +170,7 @@ FakeSniffer is an open-source software application developed primarily for detec
 >
 > 3. Install the dependencies:
 > ```console
-> $ mvn clean install
+> $ ./gradlew build
 > ```
 
 ###  Usage
@@ -180,14 +179,14 @@ FakeSniffer is an open-source software application developed primarily for detec
 
 > Run FakeSniffer using the command below:
 > ```console
-> $ java -jar target/myapp.jar
+> $ ./gradlew bootRun
 > ```
 
 ###  Tests
 
 > Run the test suite using the command below:
 > ```console
-> $ mvn test
+> $ ./gradlew test
 > ```
 
 ---
@@ -240,12 +239,6 @@ Contributions are welcome! Here are several ways you can contribute:
 ##  License
 
 This project is protected under the MIT License. For more details, refer to the [LICENSE](./LICENSE) file.
-
----
-
-##  Acknowledgments
-
-- List any resources, contributors, inspiration, etc. here.
 
 [**Return**](#-overview)
 
