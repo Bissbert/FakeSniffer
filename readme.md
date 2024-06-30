@@ -258,3 +258,7 @@ This project is protected under the MIT License. For more details, refer to the 
 [**Return**](#overview)
 
 ---
+
+## A Thanks from the team
+
+![](./nonCodeExt/teamPic.jpeg)
