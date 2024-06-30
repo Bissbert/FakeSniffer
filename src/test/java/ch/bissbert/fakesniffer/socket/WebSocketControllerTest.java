@@ -19,7 +19,9 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(WebSocketController.class)
@@ -40,22 +42,30 @@ public class WebSocketControllerTest {
     @Captor
     private ArgumentCaptor<Double> scoreCaptor;
 
+    @MockBean
+    private ConcurrentHashMap<Long, StringBuilder> activeConversations;
+
     @BeforeEach
-    public void setup() {
-        // This setup can be used to initialize any necessary data or configurations
+    public void setup() throws NoSuchFieldException, IllegalAccessException {
+        // Access the private field
+        Field field = WebSocketController.class.getDeclaredField("activeConversations");
+        field.setAccessible(true);
+        activeConversations = (ConcurrentHashMap<Long, StringBuilder>) field.get(webSocketController);
+        activeConversations.put(1L, new StringBuilder("Sample voice data"));
     }
 
     @Test
     public void testHandleVoiceInput() {
-        SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor.create();
-        headerAccessor.setNativeHeader("clientId", "1");
+        // Create a mock for SimpMessageHeaderAccessor to allow verification
+        SimpMessageHeaderAccessor headerAccessor = mock(SimpMessageHeaderAccessor.class);
+        when(headerAccessor.getFirstNativeHeader("clientId")).thenReturn("1");
         String voiceData = "test voice data";
 
+        // Call the method under test
         webSocketController.handleVoiceInput(voiceData, headerAccessor);
 
-        // Verify internal state changes or interactions
+        // Verify that getFirstNativeHeader was called correctly
         verify(headerAccessor).getFirstNativeHeader("clientId");
-        // Additional assertions can be added here
     }
 
     @Test
@@ -63,7 +73,7 @@ public class WebSocketControllerTest {
         // Setup mock data
         Report report = new Report();
         report.setContent("Historical report content");
-        when(reportService.getReportsForClient(anyLong())).thenReturn(Arrays.asList(report));
+        when(reportService.getReportsForClient(1L)).thenReturn(Arrays.asList(report));
 
         when(lamService.getContentScore(anyString(), anyString())).thenReturn(0.85);
 
@@ -71,6 +81,6 @@ public class WebSocketControllerTest {
 
         // Capture and assert the score sent to clients
         verify(template).convertAndSend(matches("/topic/ratings/1"), scoreCaptor.capture());
-        assertEquals(0.85, scoreCaptor.getValue());
+        assertEquals(0.85, scoreCaptor.getValue(), "Score should match mocked response.");
     }
 }
