@@ -59,7 +59,7 @@ loop continuous action as long as subscribed to webhook
     LTTM --> BE : provide transscript
     deactivate LTTM
 
-    BE --> LAM : request content rating and questio\ncontext certainty for client part
+    BE --> LAM : request content rating and question\ncontext certainty for client part
     activate LAM
     LAM --> BE : return score and\nquestion context certainty
     deactivate LAM
